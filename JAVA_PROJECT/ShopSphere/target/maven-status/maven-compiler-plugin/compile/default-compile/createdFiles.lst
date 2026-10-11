@@ -6,6 +6,7 @@ com\shopsphere\controller\AdminOrderServlet.class
 com\shopsphere\desktop\SwingInventoryViewer$5.class
 com\shopsphere\dao\UserDAO.class
 com\shopsphere\controller\AdminProductServlet.class
+com\shopsphere\util\DBConnection$1.class
 com\shopsphere\util\DBConnection.class
 com\shopsphere\controller\LogoutServlet.class
 com\shopsphere\dao\OrderDAO.class

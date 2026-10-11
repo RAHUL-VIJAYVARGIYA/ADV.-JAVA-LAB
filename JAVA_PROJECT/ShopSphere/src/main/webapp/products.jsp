@@ -86,10 +86,11 @@
                                         </span>
                                     </c:if>
 
-                                    <!-- Product Image -->
+                                    <!-- Product Image (Optimized Async & Lazy) -->
                                     <div class="ratio ratio-4x3 bg-light overflow-hidden rounded-top">
                                         <img src="${p.imageUrl}" class="card-img-top object-fit-cover" alt="${p.name}"
-                                             onerror="this.src='https://placehold.co/400x300?text=Product+Image'">
+                                             loading="lazy" decoding="async" width="400" height="300"
+                                             onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'><rect width=\'100%25\' height=\'100%25\' fill=\'%23e9ecef\'/><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236c757d\' font-family=\'sans-serif\' font-size=\'16\'>ShopSphere Item</text></svg>';">
                                     </div>
 
                                     <div class="card-body d-flex flex-column">

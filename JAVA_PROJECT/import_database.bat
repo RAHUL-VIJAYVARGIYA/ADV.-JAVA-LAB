@@ -1,8 +1,26 @@
 @echo off
+setlocal
 echo ========================================================
 echo Importing ShopSphere Database into MySQL...
 echo ========================================================
-"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -pmydevsql < "%~dp0JAVA_PROJECT\ShopSphere\database\shopsphere.sql"
+
+rem Auto-detect SQL file location
+set "SQL_FILE="
+if exist "%~dp0ShopSphere\database\shopsphere.sql" (
+    set "SQL_FILE=%~dp0ShopSphere\database\shopsphere.sql"
+) else if exist "%~dp0JAVA_PROJECT\ShopSphere\database\shopsphere.sql" (
+    set "SQL_FILE=%~dp0JAVA_PROJECT\ShopSphere\database\shopsphere.sql"
+) else if exist "P:\CODING\ADV. JAVA LAB\JAVA_PROJECT\ShopSphere\database\shopsphere.sql" (
+    set "SQL_FILE=P:\CODING\ADV. JAVA LAB\JAVA_PROJECT\ShopSphere\database\shopsphere.sql"
+)
+
+if "%SQL_FILE%"=="" (
+    echo [ERROR] Could not locate shopsphere.sql!
+    pause
+    exit /b 1
+)
+
+"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -pmydevsql < "%SQL_FILE%"
 if %ERRORLEVEL% equ 0 (
     echo.
     echo ========================================================

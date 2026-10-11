@@ -94,16 +94,10 @@ CREATE TABLE order_items (
 -- Comprehensive Enterprise Seed Data
 -- ===================================================================
 
--- 1. Users (Admins and Diverse Customers)
+-- 1. Essential App Administrator & Demo Customer
 INSERT INTO users (name, email, password, mobile, role, status, created_at) VALUES
 ('Super Administrator', 'admin@shopsphere.com', 'admin123', '9829012345', 'ADMIN', 'ACTIVE', '2026-01-10 10:00:00'),
-('Store Manager', 'manager@shopsphere.com', 'admin123', '9829098765', 'ADMIN', 'ACTIVE', '2026-01-15 11:30:00'),
-('Rahul Sharma', 'rahul@gmail.com', 'user123', '9829112233', 'CUSTOMER', 'ACTIVE', '2026-02-01 14:15:00'),
-('Priya Singh', 'priya.singh@yahoo.com', 'user123', '9829334455', 'CUSTOMER', 'ACTIVE', '2026-02-10 09:45:00'),
-('Amit Verma', 'amit.verma@outlook.com', 'user123', '9829556677', 'CUSTOMER', 'ACTIVE', '2026-02-18 16:20:00'),
-('Sneha Patel', 'sneha.patel@gmail.com', 'user123', '9829778899', 'CUSTOMER', 'ACTIVE', '2026-03-01 12:00:00'),
-('Rohan Mehta', 'rohan.mehta@gmail.com', 'user123', '9829881122', 'CUSTOMER', 'ACTIVE', '2026-03-12 18:30:00'),
-('Vikram Joshi', 'vikram.j@gmail.com', 'user123', '9829993344', 'CUSTOMER', 'INACTIVE', '2026-03-20 15:10:00');
+('Demo Customer', 'customer@shopsphere.com', 'user123', '9829112233', 'CUSTOMER', 'ACTIVE', '2026-01-10 10:00:00');
 
 -- 2. Categories
 INSERT INTO categories (category_id, name, description, status) VALUES
@@ -151,39 +145,3 @@ INSERT INTO products (category_id, name, brand, description, price, discount, st
 (6, 'Organic Vitamin C Brightening Facial Serum', 'DermaPure', 'Formulated with hyaluronic acid, 20% active Vitamin C, and antioxidant ferulic plant extracts.', 599.00, 10.00, 45, 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500', 'ACTIVE'),
 (6, 'Essential Oil Aromatherapy Diffuser 500ml', 'AuraMist', 'Ultrasonic quiet cold-mist humidifier with 7 color LED night lights and auto-shutoff timer.', 1299.00, 15.00, 18, 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500', 'ACTIVE'),
 (6, 'Activated Charcoal Whitening Toothpaste', 'SmileBright', 'Enamel-safe fluoride-free mineral toothpaste formulated with bamboo charcoal and peppermint.', 299.00, 0.00, 80, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500', 'ACTIVE');
-
--- 4. Customer Orders History
-INSERT INTO orders (order_id, user_id, shipping_address, total_amount, discount, payment_method, payment_status, order_status, created_at) VALUES
-(1, 3, 'Flat 402, Sunshine Residency, Tonk Road, Jaipur, Rajasthan - 302015', 3898.15, 600.00, 'UPI / QR Code', 'Completed', 'Delivered', '2026-03-02 11:20:00'),
-(2, 4, 'B-12, Sector 62, Noida, Uttar Pradesh - 201301', 2249.10, 250.00, 'Credit / Debit Card', 'Completed', 'Delivered', '2026-03-05 16:45:00'),
-(3, 5, '45, Indiranagar 100ft Road, Bengaluru, Karnataka - 560038', 2699.00, 300.00, 'UPI / QR Code', 'Completed', 'Shipped', '2026-03-15 10:10:00'),
-(4, 3, 'Flat 402, Sunshine Residency, Tonk Road, Jaipur, Rajasthan - 302015', 799.00, 0.00, 'Cash On Delivery', 'Completed', 'Shipped', '2026-03-18 14:00:00'),
-(5, 6, '701, Sea View Towers, Bandra West, Mumbai, Maharashtra - 400050', 5398.20, 600.00, 'UPI / QR Code', 'Completed', 'Processing', '2026-03-24 09:30:00'),
-(6, 7, '22/3, Jubilee Hills, Hyderabad, Telangana - 500033', 1799.00, 200.00, 'Cash On Delivery', 'Pending', 'Processing', '2026-03-28 17:15:00'),
-(7, 4, 'B-12, Sector 62, Noida, Uttar Pradesh - 201301', 1099.00, 0.00, 'Cash On Delivery', 'Completed', 'Processing', '2026-03-30 13:40:00');
-
--- 5. Order Line Items
-INSERT INTO order_items (order_id, product_id, quantity, price) VALUES
--- Order 1 (Rahul Sharma: Headphones + Thermal Flask)
-(1, 1, 1, 2974.15),
-(1, 10, 1, 799.00),
-
--- Order 2 (Priya Singh: Running Sports Shoes)
-(2, 7, 1, 2249.10),
-
--- Order 3 (Amit Verma: AMOLED Fitness Watch)
-(3, 2, 1, 2399.20),
-
--- Order 4 (Rahul Sharma: Effective Java Book)
-(4, 14, 1, 801.00),
-
--- Order 5 (Sneha Patel: Yoga Mat + Wireless Mouse + Gaming Keyboard)
-(5, 18, 2, 901.18),
-(5, 4, 1, 949.05),
-(5, 3, 1, 2069.10),
-
--- Order 6 (Rohan Mehta: Dumbbell Pair)
-(6, 19, 1, 1619.10),
-
--- Order 7 (Priya Singh: Beard Trimmer)
-(7, 21, 1, 1119.20);

@@ -28,8 +28,9 @@
                         </span>
                     </c:if>
                     <img src="${product.imageUrl}" alt="${product.name}" class="img-fluid rounded"
+                         loading="lazy" decoding="async"
                          style="max-height: 420px; object-fit: contain;"
-                         onerror="this.src='https://placehold.co/600x450?text=Product+Image'">
+                         onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\'><rect width=\'100%25\' height=\'100%25\' fill=\'%23e9ecef\'/><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%236c757d\' font-family=\'sans-serif\' font-size=\'20\'>ShopSphere Product</text></svg>';">
                 </div>
             </div>
 

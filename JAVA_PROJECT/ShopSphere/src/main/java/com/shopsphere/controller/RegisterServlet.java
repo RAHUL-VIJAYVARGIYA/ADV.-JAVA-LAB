@@ -24,6 +24,10 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String role = request.getParameter("role");
+        if (role != null && !role.trim().isEmpty()) {
+            request.setAttribute("selectedRole", "ADMIN".equalsIgnoreCase(role) ? "ADMIN" : "CUSTOMER");
+        }
         request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
@@ -35,6 +39,11 @@ public class RegisterServlet extends HttpServlet {
         String mobile = request.getParameter("mobile");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+        String role = request.getParameter("role");
+        String finalRole = "ADMIN".equalsIgnoreCase(role) ? "ADMIN" : "CUSTOMER";
+
+        // Keep role in request scope in case of error
+        request.setAttribute("selectedRole", finalRole);
 
         // Basic server-side input validation
         if (name == null || name.trim().isEmpty() ||
@@ -63,12 +72,12 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        User newUser = new User(name.trim(), email.trim(), password.trim(), mobile.trim(), "CUSTOMER");
+        User newUser = new User(name.trim(), email.trim(), password.trim(), mobile.trim(), finalRole);
         boolean created = userDAO.registerUser(newUser);
 
         if (created) {
             HttpSession session = request.getSession();
-            session.setAttribute("flashSuccess", "Registration successful! You may now sign in.");
+            session.setAttribute("flashSuccess", "Registration successful as " + finalRole + "! You may now sign in.");
             response.sendRedirect(request.getContextPath() + "/login.jsp");
         } else {
             request.setAttribute("error", "Failed to create account due to a database error. Please try again.");

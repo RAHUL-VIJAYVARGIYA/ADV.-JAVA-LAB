@@ -17,6 +17,15 @@
                     <p class="text-muted small">Access your ShopSphere account & orders</p>
                 </div>
 
+                <!-- Success Flash Alert -->
+                <c:if test="${not empty sessionScope.flashSuccess}">
+                    <div class="alert alert-success alert-dismissible fade show small" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i>${sessionScope.flashSuccess}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <c:remove var="flashSuccess" scope="session" />
+                </c:if>
+
                 <!-- Error Alert -->
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger alert-dismissible fade show small" role="alert">
@@ -25,16 +34,31 @@
                     </div>
                 </c:if>
 
-                <!-- Demo Credentials Helper Callout -->
-                <div class="alert alert-info py-2 px-3 small mb-4">
-                    <strong><i class="bi bi-info-circle me-1"></i>Demo Accounts for Lab Evaluation:</strong>
-                    <ul class="mb-0 ps-3 mt-1">
-                        <li><strong>Admin:</strong> admin@shopsphere.com / admin123</li>
-                        <li><strong>Customer:</strong> rahul@gmail.com / user123</li>
-                    </ul>
+                <!-- Quick Demo 1-Click Fill Helpers -->
+                <div class="alert alert-light border shadow-sm p-3 small mb-4 rounded-3">
+                    <div class="fw-bold text-secondary mb-2 d-flex align-items-center gap-1">
+                        <i class="bi bi-lightning-charge-fill text-warning"></i>
+                        <span>1-Click Test Credentials:</span>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-sm btn-outline-danger w-100 py-2 d-flex align-items-center justify-content-center gap-1 shadow-sm fw-semibold" onclick="fillAdminLogin()">
+                                <i class="bi bi-shield-lock-fill"></i>
+                                <span>Fill Admin</span>
+                            </button>
+                            <div class="text-muted text-center mt-1" style="font-size: 0.72rem;">admin@shopsphere.com</div>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-sm btn-outline-primary w-100 py-2 d-flex align-items-center justify-content-center gap-1 shadow-sm fw-semibold" onclick="fillUserLogin()">
+                                <i class="bi bi-person-fill"></i>
+                                <span>Fill User</span>
+                            </button>
+                            <div class="text-muted text-center mt-1" style="font-size: 0.72rem;">customer@shopsphere.com</div>
+                        </div>
+                    </div>
                 </div>
 
-                <form action="${pageContext.request.contextPath}/login" method="POST">
+                <form id="loginForm" action="${pageContext.request.contextPath}/login" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label fw-semibold">Email Address</label>
                         <div class="input-group">
@@ -58,17 +82,43 @@
                     </button>
                 </form>
 
-                <hr class="my-4">
-
-                <div class="text-center">
-                    <span class="text-muted small">Don't have an account?</span>
-                    <a href="${pageContext.request.contextPath}/register.jsp" class="fw-semibold text-decoration-none ms-1">
-                        Create One Now
-                    </a>
+                <!-- Dual Simplified Signup Section -->
+                <div class="mt-4 pt-3 border-top">
+                    <div class="text-center mb-3">
+                        <span class="text-muted fw-semibold small text-uppercase" style="letter-spacing: 0.5px;">Don't have an account? Sign up below:</span>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a href="${pageContext.request.contextPath}/register.jsp?role=CUSTOMER" class="btn btn-outline-success w-100 py-2 d-flex flex-column align-items-center justify-content-center shadow-sm h-100">
+                                <i class="bi bi-person-plus-fill fs-5 mb-1 text-success"></i>
+                                <span class="fw-bold" style="font-size: 0.85rem;">Sign Up as Customer</span>
+                                <span class="text-muted" style="font-size: 0.7rem;">Shopper Account</span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="${pageContext.request.contextPath}/register.jsp?role=ADMIN" class="btn btn-outline-danger w-100 py-2 d-flex flex-column align-items-center justify-content-center shadow-sm h-100">
+                                <i class="bi bi-shield-lock-fill fs-5 mb-1 text-danger"></i>
+                                <span class="fw-bold" style="font-size: 0.85rem;">Sign Up as Admin</span>
+                                <span class="text-muted" style="font-size: 0.7rem;">Manager Account</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
+<script>
+function fillAdminLogin() {
+    document.getElementById('email').value = 'admin@shopsphere.com';
+    document.getElementById('password').value = 'admin123';
+}
+function fillUserLogin() {
+    document.getElementById('email').value = 'customer@shopsphere.com';
+    document.getElementById('password').value = 'user123';
+}
+</script>
 
 <%@ include file="fragments/footer.jsp" %>

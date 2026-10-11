@@ -25,7 +25,32 @@
                     </div>
                 </c:if>
 
+                <c:set var="isRoleAdmin" value="${selectedRole eq 'ADMIN' or param.role eq 'ADMIN'}" />
+
                 <form action="${pageContext.request.contextPath}/register" method="POST">
+                    <!-- Account Role Selector -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Select Account Role</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="role" id="roleCustomer" value="CUSTOMER" ${not isRoleAdmin ? 'checked' : ''}>
+                                <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center h-100" for="roleCustomer">
+                                    <i class="bi bi-person-fill fs-4 text-primary"></i>
+                                    <span class="fw-bold mt-1">Customer</span>
+                                    <span class="small text-muted" style="font-size: 0.75rem;">Browse & Shop</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="role" id="roleAdmin" value="ADMIN" ${isRoleAdmin ? 'checked' : ''}>
+                                <label class="btn btn-outline-danger w-100 py-2 d-flex flex-column align-items-center justify-content-center h-100" for="roleAdmin">
+                                    <i class="bi bi-shield-lock-fill fs-4 text-danger"></i>
+                                    <span class="fw-bold mt-1">Administrator</span>
+                                    <span class="small text-muted" style="font-size: 0.75rem;">Manage Store</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <label for="name" class="form-label fw-semibold">Full Name</label>
                         <div class="input-group">
