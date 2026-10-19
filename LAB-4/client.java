@@ -1,26 +1,25 @@
 import java.io.*;
 import java.net.*;
 
-public class client {
+public class Client {
+
     public static void main(String[] args) {
         try {
             Socket socket = new Socket("localhost", 5000);
-            System.out.println("Connected to server");
+            System.out.println("Connected to server.");
 
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.print("Enter message to send: ");
-            String message = userInput.readLine();
-            output.println(message);
+            output.println("Hello Server");
 
             String response = input.readLine();
-            System.out.println("Server response: " + response);
+            System.out.println("Server says: " + response);
 
             socket.close();
+            System.out.println("Connection closed.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 }
